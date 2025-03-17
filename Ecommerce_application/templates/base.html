@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SolarTech</title>
+    {% load static %}
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/alertify.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/css/themes/default.min.css"/>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+  
+    {% include 'nav.html' %}
+    <div class="content">
+        {% block start %}
+        {% endblock %}
+    </div>
+
+
+    
+    {% include 'footer.html' %}
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.13.1/build/alertify.min.js"></script>
+    <script src="{% static 'script.js' %}"></script>
+
+    <script>
+        alertify.set('notifier','position', 'top-right');
+        {% for msg in messages  %}
+            {% if msg.tags == 'success' %}
+                alertify.success("{{ msg }}");
+            {% elif msg.tags == 'error' %}
+                alertify.error("{{ msg }}");
+            {% endif %}
+        {% endfor %}
+    </script>
+
+
+</body>
+</html>

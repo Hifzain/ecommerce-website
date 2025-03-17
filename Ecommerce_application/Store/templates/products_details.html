@@ -1,0 +1,162 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'product_details.css' %}">
+<main>
+    <div class="details_container">
+        <span class="breadcrumb">
+            <a href="{% url 'home' %}" class="{% if request.path == '/home/' %}active{% endif %}">Home</a> /
+            <a href="{% url 'category' %}">Category</a> /
+            <a href="{% url 'category' %}">Products</a> /
+            <span class="current-page">Product Details</span>
+        </span>
+                 
+         <div class="card">
+            <div class="row">
+            <div class="image-section">      
+                <img src="{{ prod.product_image.url }}" alt="image">
+            </div>
+                 <div class="info-section">
+                     <h1 class="product-title">
+                         {{ prod.product_name }}
+                     </h1>
+                     <p>
+                        <span class="original-price">Rs {{ prod.original_price }}</span>
+                        <span class="discounted-price">Rs {{ prod.discounted_price }}</span>
+                        
+                     </p>
+                     <p class="product-description">
+                         {{ prod.product_description }}
+                     </p>
+                     <hr>
+                     {% if prod.product_quantity > 0 %}
+                     <label class="stock-status in-stock">In Stock</label>
+                     {% else %}
+                     <label class="stock-status out-of-stock">Out of Stock</label>
+                     {% endif %}
+                     <div class="quantity-section">
+                         {% csrf_token %}
+                         <input type="hidden" value="{{ prod.id }}" class="prod_id">
+                         <label for="quantity">Quantity</label>
+                         
+                         <div class="quantity-controls">
+                            <button class="decrement-btn">-</button>
+                            <input type="text" name="quantity" class="quantity-input" 
+                                   value="{% if prod.product_quantity == 0 %}0{% else %}1{% endif %}" 
+                                   readonly data-max-stock="{{ prod.product_quantity }}">
+                            <button class="increment-btn">+</button>
+                        </div>
+                        
+                        
+                        
+                        <span class="error-message" style="color: red; display: none;"></span>
+                        
+                     </div>
+                     <div class="action-buttons">
+                        <button type="button" class="add-to-cart-btn">Add to Cart<i class="fa fa-shopping-cart"></i></button>
+                       
+                    </div>
+                    <ul class="product-details">
+                        {% for detail in prod.product_details.splitlines %}
+                            <li>{{ detail }}</li>
+                        {% endfor %}
+                    </ul>
+                    
+                    
+                    
+                 </div>
+             </div>
+         </div>
+     </div>
+     <div class="reviews_section">
+        <h2>Customer Reviews</h2>
+        {% if reviews.exists %}
+            {% for review in reviews %}
+                <div class="review">
+                    <h3>{{ review.subject }}</h3>
+                    <p class="rating">
+                        Rating:
+                        {% for i in "12345" %}
+                            {% if forloop.counter <= review.rateing %}
+                                <span class="fa fa-star checked"></span>
+                            {% else %}
+                                <span class="fa fa-star"></span>
+                            {% endif %}
+                        {% endfor %}
+                    </p>
+                    <p class="review-text">{{ review.review }}</p>
+                    <p class="reviewer">By: {{ review.user.Name }} on {{ review.created_at|date:"F j, Y" }}</p>
+                </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-reviews">No reviews yet. Be the first to review this product!</p>
+        {% endif %}
+    </div>
+    
+    <!-- Review Form -->
+    <div class="review-form">
+        <h2>Write a Review</h2>
+        <form method="POST">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="id_subject">Subject</label>
+                <input type="text" name="subject" id="id_subject" class="form-input" placeholder="Subject" required>
+            </div>
+            <div class="form-group">
+                <label for="id_review">Review</label>
+                <textarea name="review" id="id_review" class="form-textarea" placeholder="Write your review here..." rows="5" required></textarea>
+            </div>
+            <div class="form-group star-rating">
+                <label>Rating</label>
+                <div class="stars">
+                    <input type="radio" id="star5" name="rateing" value="5" required />
+                    <label for="star5" class="fa fa-star"></label>
+                    <input type="radio" id="star4" name="rateing" value="4" />
+                    <label for="star4" class="fa fa-star"></label>
+                    <input type="radio" id="star3" name="rateing" value="3" />
+                    <label for="star3" class="fa fa-star"></label>
+                    <input type="radio" id="star2" name="rateing" value="2" />
+                    <label for="star2" class="fa fa-star"></label>
+                    <input type="radio" id="star1" name="rateing" value="1" />
+                    <label for="star1" class="fa fa-star"></label>
+                </div>
+            </div>
+            <button type="submit" class="submit-review-btn">Submit Review</button>
+        </form>
+    </div>
+    
+</main>
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+ <script>
+    !(function () {
+    let e = document.createElement("script"),
+      t = document.head || document.getElementsByTagName("head")[0];
+    (e.src =
+      "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"),
+      (e.async = !0),
+      (e.onload = () => {
+        window.WebChat.default(
+          {
+            title:"Chatbot",
+            customData: { language: "en" },
+            socketUrl:  "http://localhost:5005/",
+          },
+          null
+        );
+      }),
+      t.insertBefore(e, t.firstChild);
+  })();
+  localStorage.clear();
+  </script>
+
+
+
+
+
+   
+{% endblock %}
+
+ 

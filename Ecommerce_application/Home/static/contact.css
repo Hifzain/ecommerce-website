@@ -1,0 +1,221 @@
+.contact{
+    position: relative;
+    min-height: 100vh;
+    padding: 10px 100px;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-color: #F8F9FA;;
+
+}
+.contact .contact-content h2{
+    font-size: 36px;
+    font-weight: bold;
+    color: navy;
+    text-align: center;
+}
+.contact .contact-content p{
+    font-weight: 200;
+    font-size: 1.5rem;
+    text-align: center;
+    color: #054f57;
+    margin: 0px;
+}
+.contact-container{
+    width: 100%;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.contact-container .contactInfo{
+    width: 50%;
+    flex-direction: column;
+    display: flex;
+}
+.contact-container .contactInfo .contact-box{
+    position: relative;
+    padding: 20px 0;
+    display: flex;
+}
+.contact-container .contactInfo .contact-box .contact-text p{
+    font-weight: 200;
+    font-size: 14px;
+    color: #054f57;
+}
+.contact-container .contactInfo .contact-box .contact-Icon {
+    min-width: 60px;
+    height: 60px;
+    color: #ccc;
+    background: #0097a7;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 22px;
+}
+.contact-container .contactInfo .contact-box .contact-text{
+    display: flex;
+    margin-left: 20px;
+    font-size: 16px;
+    color: black;
+    flex-direction: column;
+    font-weight: 300;
+}
+.contact-container .contactInfo .contact-box .contact-text h3{
+    font-weight: 500;
+    color: #00bcd4;
+}
+.contact-form {
+    background-color: #F8F9FA;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    width: 450px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.contact-form h2 {
+    font-size: 30px;
+    color: #0097a7;
+    font-weight: 500;
+    margin-bottom: 20px;
+}
+
+.contact-form .form-group {
+    width: 100%;
+    margin-bottom: 15px;
+}
+
+.contact-form .form-group label {
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.contact-form .form-group input,
+.contact-form .form-group textarea {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+.contact-form .form-group textarea {
+    resize: vertical;
+    min-height: 100px;
+}
+
+.contact-form .btn-submit {
+    background-color: #00bcd4;
+    color: white;
+    font-size: 16px;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    width: 100%;
+}
+
+.contact-form .btn-submit:hover {
+    background-color: #0097a7;
+}
+/* Styling for the map container */
+.map-container {
+    width: 100%;
+    max-width: 1100px; /* Limit max width for larger screens */
+    margin: 20px auto; /* Center it on the page */
+    text-align: center;
+}
+
+/* Styling for the map heading */
+.map-container h3 {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+/* Styling for the iframe map */
+.map-container iframe {
+    width: 100%; /* Make the map responsive */
+    height: 400px; /* Set a default height */
+    border: none; /* Remove the border */
+    border-radius: 8px; /* Optional rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.15); /* Optional shadow for a raised look */
+}
+@media (max-width: 768px) {
+    .contact{
+        margin-top: 70%;
+    }
+    .contact-container {
+        flex-direction: column; /* Stack elements vertically */
+    }
+
+    .contact-container .contactInfo {
+        width: 100%; /* Full-width for contact info */
+    }
+
+    .contact-form {
+        width: 100%; /* Full-width form */
+    }
+
+    .map-container iframe {
+        height: 300px; /* Reduced height for smaller screens */
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .contact-container{
+        width: 300px;
+    }
+    .contact-form{
+        width: 90%;
+    }
+    .contact .contact-content h2 {
+        font-size: 28px; /* Smaller font size */
+    }
+
+    .contact .contact-content p {
+        font-size: 1rem; /* Smaller font size */
+    }
+
+    .contact-container .contactInfo .contact-box {
+        
+        /* flex-direction: column; Stack icons and text */
+        align-items: flex-start;
+    }
+
+    .contact-container .contactInfo .contact-box .contact-Icon {
+        min-width: 30px;
+        height: 30px;
+        color: #ccc;
+        background: #0097a7;
+        justify-content: center;
+        align-items: center;
+        border-radius: 50%;
+        font-size: 15px;
+    }
+    .contact-form h2 {
+        font-size: 24px; /* Adjust form heading */
+    }
+    .map-container h2{
+        font-size: 18px;
+        color: #00bcd4;
+    }
+    .map-container  {
+       width: 300px;
+       margin: 0;
+    }
+}

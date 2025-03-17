@@ -1,0 +1,111 @@
+{% load static %}
+<div class="top-bar">
+    <div class="container">
+        <div class="logo-title">
+            <img src="{% static 'solartech.png' %}" alt="logo">
+        </div>
+
+        <div class="search-container">
+            <div class="search-bar">
+            <form method="GET" action="{% url 'search_products' %}">
+                <input type="text" id="unique" name="q" placeholder="Search products..." value="{{ request.GET.q }}">
+                <button type="submit">Search</button>
+            </form>
+        </div>
+        </div>      
+         <div class="address-info">
+            <p><i class="fas fa-map-marker-alt"></i>
+                Address<br>ABC Solar Energy, Swabi KPK</p>
+           
+        </div>
+    </div>
+</div>
+
+<div class="navbar">
+    <div class="container">
+        <ul>
+            <li id="home"><a href="{% url 'home' %}">Home</a></li>
+            <li id="category"><a href="{% url 'category' %}">Category</a></li>
+            <li id="about"><a href="{% url 'about' %}">About</a></li>
+            <li id="contact"><a href="{% url 'contact' %}">Contact Us</a></li>
+            <li id="energy_calculator"><a href="{% url 'energy_calculator' %}">Calculator</a></li>
+        </ul>
+    
+
+
+        <div class="menu-icon" onclick="toggleMenu()">
+            <i class="fas fa-bars" id="menu-open-icon"></i>
+            <i class="fas fa-times" id="menu-close-icon" style="display: none;"></i>
+        </div>
+        
+        <div class="account-cart">
+           
+            <div class="account-dropdown">
+                <button class="account-btn" id="account-toggle"><i class="fa-regular fa-user"></i></button>               
+                <div class="account-content">
+                    {% if request.session.user_id %}
+                <li><a href="{% url 'logout' %}">Logout</a></li>
+                <li><a href="{% url 'orders' %}">My Orders</a></li>
+                {% else %}
+                <li><a href="{% url 'login' %}">Login</a></li>
+                {% endif %}
+
+            </div>                   
+        </div>
+
+            <div class="cart">
+                <span id="cart-count">{{cart_count}}</span>
+                <a href="{% url 'cart' %}"><i class="fa-solid fa-cart-shopping"></i></a>
+            </div>
+           
+        </div>
+        
+    </div>
+</div>
+<script>
+    // Get current URL
+    function toggleMenu() {
+        const menu = document.querySelector('.navbar ul');
+        const menuOpenIcon = document.getElementById('menu-open-icon');
+        const menuCloseIcon = document.getElementById('menu-close-icon');
+
+        // Toggle menu visibility
+        menu.classList.toggle('active');
+
+        // Toggle icons
+        if (menu.classList.contains('active')) {
+            menuOpenIcon.style.display = 'none';
+            menuCloseIcon.style.display = 'block';
+        } else {
+            menuOpenIcon.style.display = 'block';
+            menuCloseIcon.style.display = 'none';
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const accountBtn = document.getElementById("account-toggle");
+        const accountDropdown = accountBtn.closest(".account-dropdown");
+    
+        accountBtn.addEventListener("click", function () {
+            accountDropdown.classList.toggle("show");
+        });    
+        // Close dropdown when clicking outside
+        document.addEventListener("click", function (event) {
+            if (!accountDropdown.contains(event.target)) {
+                accountDropdown.classList.remove("show");
+            }
+        });
+    });
+// Get current URL
+const currentUrl = window.location.href;
+
+// Highlight the matching link
+document.querySelectorAll('.navbar ul li a').forEach(link => {
+    if (link.href === currentUrl) {
+        link.classList.add('active');
+    }
+});
+
+</script>
+
+  

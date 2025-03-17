@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block start %} 
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'account.css' %}" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" />
+
+
+
+<div class="accountform">
+  <form method="post" action="{% url 'savedata' %}" id="myForm">
+    {% csrf_token %}
+
+    <h3>Sign Up</h3>
+
+    <!-- First Name Field -->
+    <div class="input_container">
+        <input type="text" placeholder="First Name" name="fname" id="first_name"
+         oninput="validateFName()" onkeyup="validateFName()" maxlength ="20">
+        <span id="first_name_error"></span>
+      </div>
+      
+      <div class="input_container">
+        <input type="text" placeholder="Last Name" name="lname" id="last_name"
+         oninput="validateLName()" onkeyup="validateLName()" maxlength ="20">
+        <span id="last_name_error"></span>
+      </div>
+      
+      <div class="input_container">
+        <input type="tel" placeholder="Phone Number" name="phoneno" id="phone_no" oninput="validatePhone()" 
+        onkeyup="validatePhone()" maxlength="11">
+        <span id="phone_no_error"></span>
+      </div>
+      
+      <div class="input_container">
+        <input type="email" placeholder="Email Address" name="email" id="email"
+         onkeyup="validateEmail()" maxlength ="30">
+        <span id="email_error"></span>
+      </div>
+      
+      <div class="input_container">
+        <input type="password" name="password" id="password" placeholder="Enter your password" 
+        onkeyup="validatePassword()" maxlength ="20">
+        <span class="toggle-password" onclick="togglePassword('password', 'showIcon', 'hideIcon')">
+          <i id="showIcon" class="fas fa-eye"></i>
+          <i id="hideIcon" class="fas fa-eye-slash" style="display: none;"></i>
+        </span>
+        <span id="password_error" class="error-message"></span>
+      </div>
+
+    <!-- Submit Button -->
+    <button type="submit" class="c_btn" onclick="return validateForm()">Submit</button>
+
+    <!-- Login Link -->
+    <div class="text">
+      Already have an account?
+      <a href="{% url 'login' %}" class="{% if loginsuccess %} {% endif %}">Login</a>
+    </div>
+  </form>
+</div>
+
+<script src="{% static 'Register.js' %}"></script>
+
+{% endblock %}

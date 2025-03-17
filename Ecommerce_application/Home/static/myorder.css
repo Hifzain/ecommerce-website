@@ -1,0 +1,157 @@
+.cart-container{
+    max-width: 80%;
+    margin-top:11%;
+    margin-bottom: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    padding:10px 20px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+#heading{
+    text-align: center;
+    color: navy;
+    font-family: Arial,sans-serif;
+    margin-bottom: 5px;
+}
+.table-heading{
+    font-size: 20px;
+    color: navy;
+    font-weight: bold;
+    background-color: #ddd;
+}
+/*table heading styling*/
+th, td{                     
+    text-align: left;
+    padding: 15px;
+    border-bottom: 5px solid #ddd;
+}
+
+.delete-btn{
+    background-color: navy;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    margin: 0 5px;
+    border-radius: 5px;
+}
+.delete-btn:hover{
+    background-color:#FFD700;
+    color: navy;
+}
+#else-text{
+    font-size: 25px;
+    color: navy;
+}
+.view-btn{
+    background-color: #003366;
+    width: 70px; 
+    color:white;  
+    transition: 0.3s ease;  
+    border: none;
+    padding: 5px 5px;
+    cursor: pointer;
+   
+    border-radius: 5px;
+}
+.view-btn:hover{
+    background-color: #e5c100;
+    color: #003366;
+}
+
+/* VIEW ORDER CSS 
+
+.checkout-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: #f8f8f8;
+}
+
+.checkout-card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 60%; /* Adjust width to prevent overlapping 
+    margin-right: 40px;
+}
+
+.card-body h1{
+    text-align: center;
+    margin-bottom: 8px;
+    color: #003366;
+}
+.productinfo {
+    width: 30%; /* Ensure it's balanced with the form 
+    padding: 20px;
+   
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background-color: #FFF;
+    justify-content: center;
+    text-align: center;
+}
+
+td img {
+    width: 80px; /* Smaller image size for better alignment 
+    height: 80px;
+}
+
+th, td {                     
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+    width: 100% ;
+}
+
+
+
+form input[type="text"], input[type="email"], select {
+    width: 95%; /* Ensure proper width 
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.col {
+    flex: 1;
+    margin-right: 20px;
+}
+.else{
+    text-align: center;
+    color: navy;
+}
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success {
+    color: #3c763d;
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+}
+h5, span{
+    font-size: 1rem;
+}
+.text-bold{
+    font-weight: bold;
+    font-size: 18px;
+    padding: 50px;
+} */

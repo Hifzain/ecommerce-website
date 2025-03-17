@@ -1,0 +1,288 @@
+{% extends "base.html" %}
+{% load static %}
+{% block start %}
+<link rel="stylesheet" href="{% static 'energy.css' %}">
+
+<form id="calculator-form">
+  <div id="calculator-container">
+    <div class="calculator-card">
+      
+       <h2>Energy Consumption Calculator</h2>
+       <h3>Standard Appliances</h3>
+      <div class="inline-inputs flex-item">
+        <label for="average_sun_hours">Average Sun Hours:</label>
+        <button type="button" onclick="changeQuantity('average_sun_hours', -1)">-</button>
+        <input type="number" id="average_sun_hours" name="average_sun_hours" value="6" min="1"
+               oninput="validateSunHours(this)" onchange="calculateTotalLoad()" readonly>
+        <button type="button" onclick="changeQuantity('average_sun_hours', 1)" >+</button>
+      </div>
+
+      <div class="row">
+        <div class="inline-inputs flex-item">
+            <label for="led_bulb_qty">LED Bulbs (7W):</label>
+            <button type="button" onclick="changeQuantity('led_bulb_qty', -1)">-</button>
+            <input type="number" id="led_bulb_qty" name="led_bulb_qty" value="0" min="0" max="24" onchange="calculateTotalLoad()" readonly>
+            <button type="button" onclick="changeQuantity('led_bulb_qty', 1)">+</button>
+        </div>
+        <div class="inline-inputs flex-item">
+            <label for="led_bulb_hours">Average Daily Usage (Hours):</label>
+            <button type="button" onclick="changeQuantity('led_bulb_hours', -1)">-</button>
+            <input type="number" id="led_bulb_hours" name="led_bulb_hours" value="0" min="0" max="24" onchange="calculateTotalLoad()" readonly>
+            <button type="button" onclick="changeQuantity('led_bulb_hours', 1)">+</button>
+        </div>
+    </div>
+    
+
+  <div class="row">
+    <div class="inline-inputs flex-item">
+        <label for="led_tv_qty">LED TV (50W):</label>
+        <button type="button" onclick="changeQuantity('led_tv_qty', -1)">-</button>
+        <input type="number" id="led_tv_qty" name="led_tv_qty" value="0" min="0" onchange="calculateTotalLoad()" >
+        <button type="button" onclick="changeQuantity('led_tv_qty', 1)">+</button>
+     </div>
+     <div class="inline-inputs flex-item">
+      <label for="led_tv_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('led_tv_hours', -1)">-</button>
+      <input type="number" id="led_tv_hours" name="led_tv_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('led_tv_hours', 1)">+</button>
+   </div>
+  </div>
+
+
+<div class="row">   
+  <div class="inline-inputs flex-item">
+      <label for="freezer_qty">Freezer (350W):</label>
+      <button type="button" onclick="changeQuantity('freezer_qty', -1)">-</button>
+      <input type="number" id="freezer_qty" name="freezer_qty" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('freezer_qty', 1)">+</button>
+  </div>
+  <div class="inline-inputs flex-item">
+    <label for="freezer_hours">Average Daily Usage (Hours):</label>
+    <button type="button" onclick="changeQuantity('freezer_hours', -1)">-</button>
+    <input type="number" id="freezer_hours" name="freezer_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+    <button type="button" onclick="changeQuantity('freezer_hours', 1)">+</button>
+  </div>
+ </div>
+ 
+  <div class="row">
+      <div class="inline-inputs flex-item">
+        <label for="washing_machine_qty">Washing Machine (800W):</label>
+        <button type="button" onclick="changeQuantity('washing_machine_qty', -1)">-</button>
+        <input type="number" id="washing_machine_qty" name="washing_machine_qty" value="0" min="0" onchange="calculateTotalLoad()"
+        readonly>
+        <button type="button" onclick="changeQuantity('washing_machine_qty', 1)">+</button>
+    </div>
+    <div class="inline-inputs flex-item">
+      <label for="washing_machine_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('washing_machine_hours', -1)">-</button>
+      <input type="number" id="washing_machine_hours" name="washing_machine_hours" value="0" min="0" onchange="calculateTotalLoad()"
+      readonly>
+      <button type="button" onclick="changeQuantity('washing_machine_hours', 1)">+</button>
+     </div>
+  </div> 
+
+
+
+   <div class="row">
+     <div class="inline-inputs flex-item">
+        <label for="fan_qty">Fans (100W):</label>
+        <button type="button" onclick="changeQuantity('fan_qty', -1)">-</button>
+        <input type="number" id="fan_qty" name="fan_qty" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+        <button type="button" onclick="changeQuantity('fan_qty', 1)">+</button>
+     </div>
+     <div class="inline-inputs flex-item">
+      <label for="fan_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('fan_hours', -1)">-</button>
+      <input type="number" id="fan_hours" name="fan_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('fan_hours', 1)">+</button>
+   </div>
+    </div>
+
+    <div class="row">
+     <div class="inline-inputs flex-item">
+        <label for="iron_qty">Iron (1000W):</label>
+        <button type="button" onclick="changeQuantity('iron_qty', -1)">-</button>
+        <input type="number" id="iron_qty" name="iron_qty" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+        <button type="button" onclick="changeQuantity('iron_qty', 1)">+</button>
+     </div>
+     <div class="inline-inputs flex-item">
+      <label for="iron_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('iron_hours', -1)">-</button>
+      <input type="number" id="iron_hours" name="iron_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('iron_hours', 1)">+</button>
+   </div>
+    </div>
+    
+    <div class="row">
+     <div class="inline-inputs flex-item">
+        <label for="ac_1ton_qty">AC 1Ton (1800W):</label>
+        <button type="button" onclick="changeQuantity('ac_1ton_qty', -1)">-</button>
+        <input type="number" id="ac_1ton_qty" name="ac_1ton_qty" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+        <button type="button" onclick="changeQuantity('ac_1ton_qty', 1)">+</button>
+     </div>
+     <div class="inline-inputs flex-item">
+      <label for="ac_1ton_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('ac_1ton_hours', -1)">-</button>
+      <input type="number" id="ac_1ton_hours" name="ac_1ton_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('ac_1ton_hours', 1)">+</button>
+   </div>
+  </div>
+  <div class="row">
+    <div class="inline-inputs flex-item">
+      <label for="refrigerator_qty">Refrigerator (350W):</label>
+      <button type="button" onclick="changeQuantity('refrigerator_qty', -1)">-</button>
+      <input type="number" id="refrigerator_qty" name="refrigerator_qty" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+      <button type="button" onclick="changeQuantity('refrigerator_qty', 1)">+</button>
+  </div>
+  <div class="inline-inputs flex-item">
+    <label for="refrigerator_hours">Average Daily Usage (Hours):</label>
+    <button type="button" onclick="changeQuantity('refrigerator_hours', -1)">-</button>
+    <input type="number" id="refrigerator_hours" name="refrigerator_hours" value="0" min="0" onchange="calculateTotalLoad()" readonly>
+    <button type="button" onclick="changeQuantity('refrigerator_hours', 1)">+</button>
+  </div>
+  </div>
+  <div class="row">
+    <div class="inline-inputs flex-item">
+        <label for="split_ac_1_5ton_qty">AC 1.5Ton (2400W):</label>
+        <button type="button" onclick="changeQuantity('split_ac_1_5ton_qty', -1)">-</button>
+        <input type="number" id="split_ac_1_5ton_qty" name="split_ac_1_5ton_qty" value="0" min="0" onchange="calculateTotalLoad()"
+        readonly>
+        <button type="button" onclick="changeQuantity('split_ac_1_5ton_qty', 1)">+</button>
+    </div>
+    <div class="inline-inputs flex-item">
+      <label for="split_ac_1_5ton_hours">Average Daily Usage (Hours):</label>
+      <button type="button" onclick="changeQuantity('split_ac_1_5ton_hours', -1)">-</button>
+      <input type="number" id="split_ac_1_5ton_hours" name="split_ac_1_5ton_hours" value="0" min="0" onchange="calculateTotalLoad()"
+      readonly>
+      <button type="button" onclick="changeQuantity('split_ac_1_5ton_hours', 1)">+</button>
+   </div>
+  </div> 
+
+    <h3>Custom Appliances</h3>
+    <span id="error-message" style="color: red; display: none;">Please enter a valid number.</span>
+    
+    <div id="custom-appliances">
+
+    </div>  
+    <button type="button" onclick="addCustomApplianceRow()" class="cstm-btn">Add Appliance</button>
+  </div>
+
+
+  <div id="results">
+    <p id="total-load">Total Load: 0 kW/day</p>
+    <p id="system-size">Required Solar System Size: 0 kW</p>
+    <button type="button" id="reset-btn" onclick="resetForm()">Reset</button>
+  </div> 
+</div> 
+</form>
+
+<script src="{% static 'calculator.js' %}"></script>
+
+<script>
+  
+let applianceCounter = 1; 
+function addCustomApplianceRow() {
+    const customAppliancesDiv = document.getElementById('custom-appliances');
+    const rowId = `appliance-row-${applianceCounter}`;
+    const rowHtml = `
+      <div class="row" id="${rowId}">
+        <div class="inline-inputs flex-item">
+          <label for="wattage-${applianceCounter}">Wattage:</label>
+          <input type="number" id="wattage-${applianceCounter}" name="wattage-${applianceCounter}" value="0" min="0" 
+          onchange="calculateTotalLoad()" oninput="validateWattage(event)">
+      
+          <label for="quantity-${applianceCounter}">Quantity:</label>
+          <button type="button" onclick="changeQuantity('quantity-${applianceCounter}', -1)">-</button>
+          <input type="number" id="quantity-${applianceCounter}" name="quantity-${applianceCounter}" value="0" min="0" 
+          onchange="calculateTotalLoad()" readonly>
+          <button type="button" onclick="changeQuantity('quantity-${applianceCounter}', 1)">+</button>
+        </div>
+        <div class="inline-inputs flex-item">
+          <label for="hours-${applianceCounter}">Average Daily Usage (Hours):</label>
+          <button type="button" onclick="changeQuantity('hours-${applianceCounter}', -1)">-</button>
+          <input type="number" id="hours-${applianceCounter}" name="hours-${applianceCounter}" value="0" min="0" 
+          onchange="calculateTotalLoad()" readonly>
+          <button type="button" onclick="changeQuantity('hours-${applianceCounter}', 1)">+</button>
+        </div>
+        <button type="button" onclick="removeApplianceRow('${rowId}')" class="remv-btn">Remove</button>
+     </div>`;
+     
+        customAppliancesDiv.insertAdjacentHTML('beforeend', rowHtml);
+        applianceCounter++;
+      }
+ 
+      
+      function validateWattage(event) {
+        const inputField = event.target;
+        const value = inputField.value;
+    
+       
+        const errorMessage = document.getElementById('error-message');
+        errorMessage.style.display = 'none';
+        errorMessage.textContent = '';
+    
+        if (isNaN(value) || value.trim() === '') {
+          errorMessage.style.display = 'inline';
+          errorMessage.textContent = 'Please enter a number.';
+          inputField.value = ''; 
+        } else if (Number(value) > 10000) {
+          errorMessage.style.display = 'inline';
+          errorMessage.textContent = 'Value cannot exceed 10,000.';
+          inputField.value = ''; 
+        }
+      }
+    
+    
+      function removeApplianceRow(rowId) {
+        const rowElement = document.getElementById(rowId);
+       if (rowElement) {
+         rowElement.remove();
+          calculateTotalLoad(); 
+       }
+      }
+      function changeQuantity(id, change) {
+        let inputField = document.getElementById(id);
+        let min = parseInt(inputField.min) || 0;
+        let max = (id.includes("hours")) ? 24 : Infinity;  
+        let currentValue = parseInt(inputField.value) || 0;
+        let newValue = currentValue + change;
+
+        if (newValue < min) newValue = min;
+        if (newValue > max) newValue = max;
+    
+        inputField.value = newValue;
+  
+        if (id.includes("hours")) {
+            updateButtonState(id);
+        }
+    
+        calculateTotalLoad();
+    }
+    
+    function updateButtonState(id) {
+        let inputField = document.getElementById(id);
+        let max = 24;
+        let currentValue = parseInt(inputField.value) || 0;
+    
+        let parentDiv = inputField.closest('.inline-inputs'); 
+        let decrementButton = parentDiv.querySelector("button:first-of-type"); 
+        let incrementButton = parentDiv.querySelector("button:last-of-type"); 
+    
+        if (id.includes("hours")) {
+            incrementButton.disabled = (currentValue >= max);
+            decrementButton.disabled = (currentValue <= 0);
+        }
+    }
+    
+    document.addEventListener("DOMContentLoaded", function () {
+        document.querySelectorAll("input[id$='hours']").forEach(input => {
+            updateButtonState(input.id);
+        });
+    });
+    
+    
+    
+    </script>
+{% endblock %}
+
+

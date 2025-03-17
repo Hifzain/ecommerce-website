@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'checkout.css' %}">
+
+<form method="POST" action="{% url 'placeorder' %}" id="checkoutform" onsubmit="return validateForm()">
+    {% csrf_token %}
+    <div class="checkout-container">
+        <div class="checkout-cardd">
+            <div class="card-body">
+                <h1>Personal Details</h1>
+                <div class="row">
+                    <div class="col">
+                        <label>First Name</label>
+                        <input type="text" id="first_name" name="first_name" value="{{ first_name }}"
+                               placeholder="Enter your First name" oninput="validateF_name()" maxlength="10" required>
+                        <span id="first_name_error"></span>
+                    </div>
+                    <div class="col">
+                        <label>Last Name</label>
+                        <input type="text" id="last_name" name="last_name" value="{{ last_name }}"
+                               placeholder="Enter your Last name" oninput="validateL_name()" maxlength="10" required>
+                        <span id="last_name_error"></span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Email</label>
+                        <input type="email" id="email" name="email" value="{{ email }}"
+                               placeholder="Enter your email" oninput="validateEmail()" maxlength="35" required>
+                        <span id="email_error"></span>
+                    </div>
+                    <div class="col">
+                        <label>Contact</label>
+                        <input type="text" id="phone_no" name="phone_no" value="{{ Phone }}"
+                               placeholder="Enter your Phone Number" oninput="validatePhone()" maxlength="11" required>
+                        <small class="error-message" id="phone_no_error"></small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Address</label>
+                        <input type="text" id="address" name="address"
+                               placeholder="e.g., House no, street no, town" oninput="validateAddress()" maxlength="35">
+                        <small class="error-message" id="address_error"></small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label for="state">State/Province:</label>
+                        <select id="state" name="state" required>
+                            <option value="">Select State/Province</option>
+                            <option value="Punjab">Punjab</option>
+                            <option value="KPK">KPK</option>
+                            <option value="Balochistan">Balochistan</option>
+                            <option value="Sindh">Sindh</option>
+                            <option value="AJK">AJK</option>
+                            <option value="GB">GB</option>
+                        </select>
+                        <small class="error-message" id="state_error"></small>
+                    </div>
+                    <div class="col">
+                        <label>City</label>
+                        <input type="text" id="city" name="city" placeholder="Enter your City"
+                               oninput="validateCity()" maxlength="20">
+                        <small class="error-message" id="city_error"></small>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <label>Zip Code</label>
+                        <input type="text" id="pincode" name="pincode"
+                               placeholder="Enter your Zip Code" oninput="validateZipcode()" maxlength="6">
+                        <small class="error-message" id="pincode_error"></small>
+                    </div>
+                    <div class="col">
+                        <label for="payment_mode">Payment Mode:</label>
+                        <select id="payment_mode" name="payment_mode" required>
+                            <option value="">Select Payment Mode</option>
+                            <option value="COD">Cash on Delivery</option>
+                        </select>
+                        <small class="error-message" id="payment_mode_error"></small>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="productinfoo">
+            {% if cartitems %}
+                <h2>Order Summary</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Qty</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in cartitems %}
+                            <tr>
+                                <td><img src="{{ item.product.product_image.url }}" alt="Product Image">
+                                    {{ item.product.name }}</td>
+                                <td>{{ item.product_qty }}</td>
+                                <td>RS {{ item.product.discounted_price|floatformat:2 }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <div class="price-details">
+                    <h5>Subtotal: <span>RS {{ total_price|floatformat:2 }}</span></h5>
+                    <h5>Tax (10%): <span>RS {{ tax_amount|floatformat:2 }}</span></h5>
+                    <h4>Total Price (with Tax): <span>RS {{ total_price_with_tax|floatformat:2 }}</span></h4>
+                </div>
+
+                <button type="submit" class="place-btn" id="submitBtn">Place Order</button>
+            {% else %}
+                <h3 class="else">Your Cart is empty</h3>
+            {% endif %}
+        </div>
+    </div>
+</form>
+
+<script src="{% static 'checkout.js' %}"></script>
+{% endblock %}

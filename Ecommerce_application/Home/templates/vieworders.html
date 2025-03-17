@@ -1,0 +1,138 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'checkout.css' %}">
+
+<style>
+    .checkout-card {
+        padding: 20px;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        background-color: #fff;
+        margin-bottom:10px;
+    }
+    
+    .card-body h1 {
+        font-size: 30px;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+    
+    .checkout-table {
+        width: 100%;
+        border-collapse: collapse;  /* Removes space between cells */
+        margin-top: 20px;
+    }
+    
+    .checkout-table td {
+        padding: 10px;
+        text-align: left;
+        vertical-align: top;
+        width: 50%;
+    }
+    
+    .checkout-table td strong {
+        font-weight: bold;
+        color: #333;
+    }
+    
+    .checkout-table td {
+        color: #555;
+        border-bottom: 1px solid #ddd;  /* Adds a separator line between rows */
+    }
+    
+    /* Styling the last row to have no bottom border */
+    .checkout-table tr:last-child td {
+        border-bottom: none;
+    }
+    
+    .checkout-table tr:nth-child(odd) {
+        background-color: #f9f9f9;  /* Light gray background for alternate rows */
+    }
+    
+    .checkout-table td[colspan="3"] {
+        width: 100%;  /* Makes the Address field take up the full row */
+    }
+    
+    @media (max-width: 768px) {
+        .checkout-table td {
+            padding: 8px;  /* Reduced padding for smaller screens */
+        }
+    }
+    
+</style>    
+  <div class="checkout-container">
+    <div class="checkout-card">
+        <div class="card-body">
+            <h1>Personal Details</h1>
+    
+            <table class="checkout-table">
+                <tr>
+                    <td><strong>First Name:</strong></td>
+                    <td>{{ order.first_name }}</td>
+                    <td><strong>Last Name:</strong></td>
+                    <td>{{ order.last_name }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Email:</strong></td>
+                    <td>{{ order.email }}</td>
+                    <td><strong>Contact:</strong></td>
+                    <td>{{ order.phone_no }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Address:</strong></td>
+                    <td colspan="3">{{ order.address }}</td>
+                </tr>
+                <tr>
+                    <td><strong>State/Province:</strong></td>
+                    <td>{{ order.state }}</td>
+                    <td><strong>City:</strong></td>
+                    <td>{{ order.city }}</td>
+                </tr>
+                <tr>
+                    <td><strong>Zip Code:</strong></td>
+                    <td>{{ order.pincode }}</td>
+                    <td><strong>Payment Mode:</strong></td>
+                    <td>{{ order.payment_mode }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    
+
+      <!-- Right side: Order Summary -->
+      <div class="productinfo">
+        <h1>Order Details</h1>
+              <table>
+                  <thead>
+                      <tr>
+                          <th>Name</th>
+                          <th>Qty</th>
+                          <th>Price</th>
+                          <th>Image</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for item in orderitem %}
+                          <tr>
+                              
+                              <td>{{ item.product.product_name }}</td>
+                              <td>{{ item.quantity }}</td>
+                              <td>{{ item.price}}</td>
+                              <td><img src="{{ item.product.product_image.url }}" alt="Product Image"></td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+              </table>
+              <h5>Total Price :  <span> RS {{order.total_price }}</span></h5>
+              <p>Order Status: {{order.status }}<p/>
+              
+          
+         
+      </div>
+  </div>
+</form>
+
+  
+{% endblock %}

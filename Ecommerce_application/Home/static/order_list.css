@@ -1,0 +1,81 @@
+
+/* Page heading */
+h1 {
+    text-align: center;
+    color: #333;
+}
+.order-container{
+    justify-content: center;
+    align-items: center;
+}
+/* Orders table styling */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    margin-top: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #007BFF;
+    color: white;
+}
+
+/* Alternating row colors */
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* Hover effect on rows */
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* No orders message styling */
+.no-orders {
+    text-align: center;
+    background: #fff;
+    padding: 20px;
+    margin: 20px auto;
+    width: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.no-orders h2 {
+    color: #d9534f;
+    font-size: 24px;
+}
+
+.no-orders p {
+    color: #555;
+    font-size: 16px;
+}
+
+/* Dashboard button styling */
+.dashboard-btn {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.dashboard-btn a button {
+    background-color: #007BFF;
+    color: white;
+    border: none;
+    padding: 12px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background 0.3s ease;
+}
+
+.dashboard-btn a button:hover {
+    background-color: #0056b3;
+}

@@ -1,0 +1,46 @@
+
+
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'order_list.css' %}">
+<div class="order-container">
+<h1>{{ status|title }} Orders</h1>
+
+{% if orders %}
+<table>
+    <thead>
+        <tr>
+            <th>Order ID</th>
+            <th>Customer</th>
+            <th>Total Price</th>
+            <th>Status</th>
+            <th>Date</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for order in orders %}
+        <tr>
+            <td>{{ order.id }}</td>
+            <td>{{ order.user.Name }}</td>
+            <td>{{ order.total_price }}</td>
+            <td>{{ order.status }}</td>
+            <td>{{ order.created_at }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<div class="no-orders">
+    <h2>No {{ status|title }} Orders Found</h2>
+    <p>It looks like there are no {{ status|lower }} orders at the moment.</p>
+    <p>Check back later for updates.</p>
+</div>
+{% endif %}
+
+<div class="dashboard-btn">
+    <a href="{% url 'dashboard' %}">
+        <button type="submit">Back To Dashboard</button>
+    </a>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,179 @@
+/* General Styles */
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: aliceblue;
+    color: #f0f0f0;
+}
+
+/* Header */
+header {
+    text-align: center;
+    padding: 10px 5px;
+   background-color: rgba(72, 145, 100, 0.477);
+    color: white;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    animation: fadeIn 2s ease-in-out;
+}
+
+.header .title, .subtitle {
+    font-size: 2.5rem;
+    color: darkgreen; 
+}
+
+/* Styling for the box1 class */
+.box1 {
+    background: rgba(195, 205, 214, 0.8); /* Dark transparent blue background */
+    padding: 40px 30px; /* Padding for spacing */
+    border-radius: 12px; /* Rounded corners */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6); /* Subtle shadow effect */
+    backdrop-filter: blur(10px); /* Slight blur to the background */
+    max-width: 900px; /* Max width for larger screens */
+    margin: 50px auto; /* Center it horizontally with top/bottom margin */
+    text-align: center;
+    opacity: 0;
+    animation: fadeInUp 2s ease-in-out forwards; /* Fade-in animation */
+}
+
+.box1 h1 {
+    color: green; /* Gold color for the title */
+    font-size: 2.5rem; /* Larger font size */
+    margin-bottom: 15px; /* Space below the heading */
+}
+
+.box1 p {
+    font-size: 1.5rem; /* Slightly larger text for readability */
+    line-height: 1.6; /* Line height for better readability */
+    color: rgba(14, 95, 14, 0.85); /* Light text color */
+    margin: 0; /* Remove default margin */
+}
+
+.box1 br {
+    margin-bottom: 15px; /* Spacing for line breaks */
+}
+
+/* About Section */
+.about-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    padding: 50px 20px;
+    text-align: center;
+}
+
+.about-section .content {
+    background: rgba(195, 205, 214, 0.8); 
+    padding: 20px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(8px);
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-in-out forwards;
+}
+
+.about-section .content h2 {
+    color: green; /* Gold text */
+}
+
+.about-section .content p, .about-section .content ul {
+    font-size: 1.1rem;
+    color: rgba(14, 95, 14, 0.85); /* Light green */
+}
+
+.about-section .content ul li {
+    margin: 10px 0;
+}
+
+/* Projects Section */
+.projects-section {
+    padding: 50px 20px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.477); /* Dark transparent background */
+    color: white;
+}
+
+.section-title {
+    font-size: 2rem;
+    color: #ffd700; /* Gold */
+    margin-bottom: 30px;
+    animation: fadeIn 2s ease-in-out;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Responsive layout */
+    gap: 20px;
+    justify-items: center;
+}
+
+.project-card {
+    background: rgba(20, 20, 20, 0.9);
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    opacity: 0;
+    animation: fadeInUp 1.5s ease-in-out forwards;
+    width: 100%;
+    max-width: 350px; /* Limit the max width */
+}
+
+/* Positioning for the image container */
+.image-container {
+    position: relative;
+    width: 100%;
+    height: auto;
+    overflow: hidden; /* Ensures no overflow for images */
+}
+
+/* Default image styles */
+.default-image {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.3s ease; /* Smooth transition effect */
+}
+
+/* Hover image styles */
+.hover-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0; /* Hidden by default */
+    transition: opacity 0.3s ease; /* Smooth transition effect */
+}
+
+/* On hover, hide the default image and show the hover image */
+.image-container:hover .default-image {
+    opacity: 0; /* Hide default image */
+}
+
+.image-container:hover .hover-image {
+    opacity: 1; /* Show hover image */
+}
+
+.project-content {
+    padding: 15px;
+    color: #ddd;
+}
+.project-content span{
+    color: rgba(73, 226, 73, 0.85);
+}
+
+.project-content h3 {
+    color: #ffd700; /* Gold for project titles */
+    margin-bottom: 10px;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+@keyframes fadeInUp {
+    0% { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+}

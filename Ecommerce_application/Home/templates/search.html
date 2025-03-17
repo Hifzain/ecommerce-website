@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block start %}
+
+{% load static %}
+<link rel="stylesheet" href="{% static 'product.css' %}">
+<div class="product-header">
+{% if products %}
+    <div class="product-container">
+        {% for item in products %}
+        <a href="{% url 'productview' item.category.slug item.slug %}">
+            <div class="products-card">
+              <div class="product-image-wrapper">
+                {% if item.product_quantity > 0 %}
+                    <span class="discount-percentage">- {{ item.discount_percentage }}%</span>
+                    {% else %}
+                    <span class="sold-out-badge">Sold Out</span>
+                {% endif %}
+                    <img src="{{ item.product_image.url }}" alt="Product Image">
+                
+            </div>
+                <h5 class="product-name">{{ item.product_name }}</h5>
+                <p>
+                  <span class="original-price">Rs {{ item.original_price }}</span>
+                  <span class="discounted-price">Rs {{ item.discounted_price }}</span>                      
+               </p>
+                <input type="hidden" class="prod_id" value="{{ item.id }}">
+                <input type="hidden" class="quantity-input" value="1">
+                {% csrf_token %}
+                <button class="add-to-cart-btn">Add to Cart</button>
+            </div>
+        </a>
+        {% endfor %}
+    </div>
+</div>
+{% else %}
+    <p class="else" >{{ message|default:"No Products Found." }}</p>
+{% endif %}
+
+{% endblock %}

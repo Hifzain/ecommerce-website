@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'home.css' %}">
+
+<div class="image-slider-container">
+    <div class="slide">
+        <img src="{% static 'images/dalle.webp' %}" alt="Slide 1">
+        <div class="text-overlay">
+            <h2>Powering the Future with Technology & Solar Energy</h2>
+            <p>Explore our wide range of electronics and solar products designed for efficiency and sustainability.</p>
+        </div>
+    </div>
+
+    <div class="slide">
+        <img src="{% static 'images/electronics.webp' %}" alt="Slide 2">
+        
+    </div>
+    
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+</div>
+
+
+<script>
+let slideIndex = 0;
+showSlidesAuto();  
+function showSlidesAuto() {
+    let i;
+    const slides = document.getElementsByClassName("slide");
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";  
+    }
+    slideIndex++;
+    if (slideIndex > slides.length) {
+        slideIndex = 1;
+    }
+    slides[slideIndex - 1].style.display = "block";  
+    setTimeout(showSlidesAuto, 5000); 
+}
+
+function changeSlide(n) {
+    slideIndex += n;
+    if (slideIndex > document.getElementsByClassName("slide").length) {
+        slideIndex = 1;
+    } else if (slideIndex < 1) {
+        slideIndex = document.getElementsByClassName("slide").length;
+    }
+    showSlidesManual();
+}
+function showSlidesManual() {
+    let i;
+    const slides = document.getElementsByClassName("slide");
+
+    for (i = 0; i < slides.length; i++) {
+        slides[i].style.display = "none";
+    }
+    slides[slideIndex - 1].style.display = "block";
+}
+
+</script>
+
+<h1 class="category-title">All CATEGORIES</h1>
+
+<div class="home-container">
+    {% for item in home_category %}
+    <a href="{% url 'products' item.slug %}">
+        <div class="home-card">
+            <img src="{{ item.category_image.url }}" alt="category image">
+            <h2 class="category-name">{{ item.category_name }}</h2>         
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+<h1 class="trending_title">TRENDING PRODUCTS</h1>
+<div class="trending-container">
+    {% for item in trending_products %}
+    <a href="{% url 'productview' item.category.slug item.slug %}">
+    <div class="trending-products">
+        <div class="product-image-wrapper">
+            {% if item.product_quantity > 0 %}
+                <span class="discount-percentage">- {{ item.discount_percentage }}%</span>
+                {% else %}
+                <span class="sold-out-badge">Sold Out</span>
+            {% endif %}
+                <img src="{{ item.product_image.url }}" alt="Product Image">
+            
+        </div>
+        
+        <div>
+            <h5>{{ item.product_name }}</h5>
+            <p>
+                
+                <span class="original-price">Rs {{ item.original_price }}</span>
+                <span class="discounted-price">Rs {{ item.discounted_price }}</span>
+                
+             </p>
+            <input type="hidden" class="prod_id" value="{{ item.id }}">
+            <input type="hidden" class="quantity-input" value="1">
+            {% csrf_token %}
+            <button class="add-to-cart-btn">Add to Cart</button>
+
+        </div>
+    </div>
+    {% endfor %}
+</a>
+</div>
+
+
+</div>
+
+<script>
+    !(function () {
+        let script = document.createElement("script");
+        script.src = "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"; 
+        script.async = true; 
+        script.onload = () => {
+            window.WebChat.default({
+                title: "Chatbot", 
+                initPayload: "/welcome", 
+                customData: { language: "en" }, 
+                socketUrl: "http://localhost:5005/", 
+            },);
+        };
+        document.head.appendChild(script);
+    })();
+    localStorage.clear();
+    </script>
+{% endblock %}

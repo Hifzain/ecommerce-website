@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'category.css' %}">
+<div class="category-header">
+  <span class="breadcrumb">
+    <a href="{% url 'home' %}">Home</a> /
+    <span>Category</span> 
+  </span>
+  <h1 class="category-title">COLLECTION OF CATEGORIES</h1>
+</div>
+
+<div class="category-container">
+    {% for item in category %}
+    <a href="{% url 'products' item.slug%}">
+    <div class="category-card">
+        <img src="{{item.category_image.url}}" alt="category image">
+            <h2 class="category-name">{{item.category_name}}</h2>
+            <p class="category-description">{{item.category_description}}</p>            
+    </div>
+    </a>
+    {% endfor %}
+</div>
+
+<script>
+  !(function () {
+      let script = document.createElement("script");
+      
+      script.src = "https://cdn.jsdelivr.net/npm/rasa-webchat@1.x.x/lib/index.js"; 
+      script.async = true; 
+      script.onload = () => {
+          
+          window.WebChat.default({
+              title: "Chatbot", 
+              initPayload: "/welcome",
+              customData: { language: "en" }, 
+              socketUrl: "http://localhost:5005/", 
+      };
+  
+      document.head.appendChild(script);
+  })();
+  localStorage.clear();
+
+</script>
+{% endblock %}
+

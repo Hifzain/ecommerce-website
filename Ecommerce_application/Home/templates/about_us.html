@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'about.css' %}">
+<body>
+    <header class="header">
+      <h1 class="title">About Us</h1>
+      <p class="subtitle">Your Trusted Partner in Solar and Electronics</p>
+    </header>
+    <div class="box1">
+          <h1>Welcome to SolarTech Green Energy Solution</h1>
+        <br>
+        <p>
+        We are dedicated to providing eco-friendly, 
+        reliable solar solutions for homes and businesses. Our mission is to deliver top-quality 
+        solar accessories  which helping you save on energy costs.
+      </p>
+    </div>
+    <section class="about-section">
+      <div class="content">
+        <h2>Our Vision</h2>
+        <p>
+          To empower individuals and businesses with sustainable and innovative solar solutions 
+          while ensuring convenience and reliability in every transaction.
+        </p>
+      </div>
+      <div class="content">
+        <h2>Why Choose Us?</h2>
+        <ul>
+          <li>Wide range of products</li>
+          <li>Competitive pricing</li>
+          <li>Top-notch customer support</li>
+        </ul>
+      </div>
+    </section>
+    <section id="projects" class="projects-section">
+        <h2 class="section-title">Our Solar Projects</h2>
+        <div class="projects-grid">
+          <!-- Project 1 -->
+          <div class="project-card">
+            <div class="image-container">
+              <img src="{% static 'project1pic1.jpeg.jpg' %}" alt="Solar Project 2" class="default-image">
+            <img src="{% static 'project1pic2.jpeg.jpg' %}" alt="Solar Project 1" class="hover-image">
+            </div>
+            <div class="project-content">
+              <h3>Residential Solar Installation</h3>
+              <p><span>Location:</span> Zarobi, Swabi</p>
+              <p><span>System:</span> Tesla 3.6 hybrid solar system with 8 solar panels canadian N-type 575watt</p>
+            </div>
+          </div>
+      
+          <!-- Project 2 -->
+          <div class="project-card">
+            <div class="image-container">
+              <img src="{% static 'abc.jpg' %}" alt="Solar Project 1" class="default-image">
+              <img src="{% static 'def.jpg' %}" alt="Solar Project 2" class="hover-image">
+              </div>
+            <div class="project-content">
+              <h3>Residential Solar Plant</h3>
+              <p><span>Location:</span> Masjid Noor Shahmansor town Swabi</p>
+              <p><span>System:</span> Knox 8kw ip 65 hybrid system with 14 solar panels canadian N-type 580watt bificial</p>
+            </div>
+          </div>
+      
+          <!-- Add more project cards as needed -->
+        </div>
+      </section>
+      
+  </body>
+</html>
+  {% endblock %}

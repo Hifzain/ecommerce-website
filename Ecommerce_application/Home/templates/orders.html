@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block start %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'myorder.css' %}">
+    
+    <div class="cart-container">
+        <h1 id="heading">My Orders</h1>
+
+        {% if myorder %}
+        <table>
+            <thead>
+                <tr class="table-heading">
+                    <td>Order Date</td>
+                    <td>Total Price</td>
+                    <td>Status</td>
+                    <td>Action</td>
+                </tr>
+            </thead>
+            <tbody>   
+                {% for item in myorder %}
+                <tr>      
+                    <td>{{ item.created_at|date:"d M Y" }}</td>
+                    <td>{{ item.total_price }}</td>
+                    <td>{{ item.status }}</td>
+                    <td>
+                        <a href="{% url 'vieworders' item.created_at %}">
+                            <button class="view-btn">View</button>
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}  
+            </tbody>
+        </table>
+        {% else %}
+        <p id="else-text">You have no orders yet.</p>
+        {% endif %}
+    </div>
+{% endblock %}

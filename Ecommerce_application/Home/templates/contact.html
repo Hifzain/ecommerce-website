@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+{% block start %} 
+{% load static %}
+<link rel="stylesheet" href="{% static 'contact.css' %}">
+
+<section class="contact">
+  <div class="contact-content">
+    <h2>Contact Us</h2>
+    <p>We are Providing 24/7 Customer Assistance</p>
+  </div>
+  <div class="contact-container">
+    <div class="contactInfo">
+      <div class="contact-box">
+        <div class="contact-Icon"><i class="fa-solid fa-location-dot"></i></div>
+        <div class="contact-text">
+          <h3>Visit the Shop Location</h3>
+          <p>
+            Murghuz Solar Energy, Swabi KPK
+            Pakistan
+          </p>
+        </div>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-Icon"><i class="fa-solid fa-phone"></i></div>
+        <div class="contact-text">
+          <h3>Phone Number</h3>
+          <p>+92301-9057015</p>
+        </div>
+      </div>
+
+      <div class="contact-box">
+        <div class="contact-Icon"><i class="fa-solid fa-envelope"></i></div>
+        <div class="contact-text">
+          <h3>Email Address</h3>
+          <p>solartech12421@gmail.com</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="contact-form">
+      <h2>Send a Message</h2>
+      <form method="POST">
+          {% csrf_token %}
+  
+          <!-- Name Field -->
+          <div class="form-group">
+              <label for="id_name">Name</label>
+              {{ form.name }}
+              {% if form.name.errors %}
+                  <div class="error">{{ form.name.errors.0 }}</div>
+              {% endif %}
+          </div>
+  
+          <!-- Email Field -->
+          <div class="form-group">
+              <label for="id_Email">Email</label>
+              {{ form.Email }}
+              {% if form.Email.errors %}
+                  <div class="error">{{ form.Email.errors.0 }}</div>
+              {% endif %}
+          </div>
+  
+          <!-- Message Field -->
+          <div class="form-group">
+              <label for="id_message">Message</label>
+              {{ form.message }}
+              {% if form.message.errors %}
+                  <div class="error">{{ form.message.errors.0 }}</div>
+              {% endif %}
+          </div>
+  
+          <button type="submit" class="btn-submit">Submit</button>
+      </form>
+  </div>
+  
+
+    <!-- Map Location -->
+   
+  </div>
+  <div class="map-container">
+    <h2>Follow This Location to Visit Our Shop</h2>
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d26420.780559343693!2d72.43500684591994!3d34.13105090405958!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38deef747aaa83bb%3A0x2b89195da1793f3b!2sSwabi%2C%20Khyber%20Pakhtunkhwa%2C%20Pakistan!5e0!3m2!1sen!2s!4v1730730807639!5m2!1sen!2s" 
+    width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+     
+  </div>
+</section>
+<style>
+  .error {
+    color: red;
+    font-size: 0.9em;
+    margin-top: 5px;
+}
+
+.contact-form .form-group {
+    margin-bottom: 20px;
+}
+
+</style>
+{% endblock %}

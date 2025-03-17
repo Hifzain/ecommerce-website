@@ -1,0 +1,443 @@
+body {  
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height: 1.6;
+}
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: #fff; 
+    z-index: 1000; 
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); 
+}
+
+.top-bar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap; 
+    padding: 0 15px; 
+}
+
+.logo-title {
+    display: flex;
+    align-items: center;
+    flex: 1; 
+}
+
+.logo-title img {
+    height: 70px;
+    width: 120px; 
+    margin-right: 10px;
+}
+.search-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 2; 
+    margin: 10px 0; 
+}
+
+.search-bar {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin-right: 15%;
+
+}
+
+.search-bar input[type="text"] {
+    width: calc(100% - 50px);
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #cccccc;
+    border-radius: 25px 0 0 25px;
+    outline: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 0;
+}
+.search-bar input:focus {
+    border-color: #0B3D91; 
+    box-shadow: 0 0 5px rgba(11, 61, 145, 0.5); 
+  }
+
+.search-bar button {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 100%;
+    padding: 0 20px;
+    font-size: 15px;
+    font-weight: bold;
+    background: #0B3D91;
+    color: white;
+    border: none;
+    border-radius: 0 25px 25px 0;
+    cursor: pointer;
+}
+.search-bar button:hover{
+    background: #ffcc00;
+}
+.search-bar input[type="text"]::placeholder {
+    color: #aaa;
+}
+.address-info p {
+    font-size: 14px;
+    color: navy;
+    font-weight: bold;
+   
+}
+.address-info p i{
+    color: #fdd73d;
+    margin-right: 5px;
+    font-size: 18px;
+}
+
+@media screen and (max-width: 768px) {
+    .navbar {
+        margin-top: 26%;
+        padding-top: 10px;        
+    }
+    .top-bar .container {
+        flex-direction: column; 
+        align-items: center;
+    }
+
+    .logo-title {
+        justify-content: center;
+        margin-bottom: 10px; 
+    }
+
+    .search-container {
+        margin: 10px 0;
+    }
+
+    .search-bar {
+        max-width: 100%;
+    }
+
+    .search-bar input[type="text"] {
+        font-size: 14px;
+    }
+
+    .search-bar button {
+        font-size: 14px;
+    }
+
+    .contact-info p {
+        text-align: center; 
+        margin-top: 10px; 
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        margin-top: 130px;
+        padding-top: 10px;        
+    }
+    .logo-title img {
+        width: 120px; 
+    }
+
+    .search-bar input[type="text"] {
+        padding: 8px; 
+    }
+    .search-bar{
+        width: 250px;
+    }
+    .search-bar button {
+        padding: 0 15px; 
+    }
+
+    .contact-info p {
+        font-size: 14px; 
+    }
+}
+
+
+
+.container{
+    margin-left: 25px;
+}
+.navbar {
+    position: fixed;
+    top: 70px;
+    height: 60px;
+    width: 100%;
+    background: darkblue; 
+    z-index: 999; 
+}
+
+.navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul {
+    list-style: none;
+    margin: 0;
+    padding:0;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.navbar ul li {
+    padding: 15px 10px 10px 10px;
+    text-align: center;
+}
+
+.navbar ul li a {
+    font-family: 'Poppins', sans-serif;
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    display: inline-block;
+    position: relative;
+    transition: 0.3s ease;
+}
+
+
+.navbar ul li a::after {
+    content: "";
+    width: 0%;   
+    height: 3px;  
+    background: #ffcc00;
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    transition: width 0.5s ease;
+}
+.navbar ul li a:hover::after {
+    width: 100%; 
+}
+
+
+.navbar ul li a.active {
+    color: #fdd73d; 
+    font-weight: bold;    
+}
+
+.account-cart {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-right: 20px;
+}
+
+.account-btn {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 25px;
+    cursor: pointer;
+}
+.account-btn:hover{
+    color: #fdd73d;
+}
+.account-content {
+    display: none;
+    position: absolute;
+    background-color:#fff;
+    text-align: center;
+    box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    top: 45px;
+    width: 80px;
+    border-radius: 5px;
+    overflow: hidden;
+    font-weight: bold;
+    margin-top: 5px;
+}
+.account-content a:hover{
+    color: #FFD700;
+}
+
+.account-dropdown.show .account-content {
+    display: block;
+}
+
+
+.cart a {
+    color: white;
+    font-size: 25px;
+    text-decoration: none;
+}
+
+.menu-icon {
+    display: none;
+    cursor: pointer;
+}
+
+.menu-icon i {
+    font-size: 25px;
+    color: white;
+}
+
+@media (max-width: 768px) {
+    .alertify-notifier .ajs-message {
+        max-width: 120px; 
+        font-size: 12px;
+        padding: 8px; 
+    }
+    .navbar ul {
+        display: none;
+        flex-direction: column;
+        background: #200a9b;
+        position: absolute;
+        top: 50px;
+        right: 0;
+        width: 100%;
+        padding: 10px 0;
+        gap: 10px;
+        height: auto;
+    }
+    .navbar ul li{
+        text-align: center;
+        font-family: 'Times New Roman', Times, serif;
+        padding-top: 10px;
+    }
+    
+    .account-content {
+        display: none;
+        position: absolute;
+        background-color:#ddd;
+        text-align: center;
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+        top: 50px;
+        width: 22%;
+        border-radius: 5px;
+        overflow: hidden;
+        padding-left: 5px;
+    }
+    
+    .menu-icon {
+        display: block;
+        margin-right: 180px; 
+    }
+    .navbar ul.active {
+        display: block;
+    }
+}
+
+
+footer {
+    background: #00008B;
+    color: #fff;
+    padding: 20px 0;
+    font-size: 14px;
+}
+.footer-container {
+    display: flex;
+    justify-content: space-around;
+    padding: 20px;
+}
+.footer-about, .footer-services, .footer-contact, .footer-category {
+    width: 20%;
+}
+.footer-about h4, .footer-services h4, .footer-contact h4, .footer-category h4 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #FFD700;
+}
+
+.footer-category ul{
+    list-style-type: none;
+    padding: 0;
+}
+.footer-category ul li{
+    margin-bottom: 8px;
+}
+.footer-category ul li a{
+    text-decoration: none;
+    margin-right: 10px;
+    color: #FFF;
+}
+.footer-services ul {
+    list-style-type: none;
+    padding: 0;
+}
+.footer-services ul li {
+    margin-bottom: 8px;
+}
+.footer-services ul li i {
+    margin-right: 10px;
+    color: #FFD700;
+}
+.footer-contact p i {
+    margin-right: 10px;
+    color: #FFD700;
+}
+.footer-bottom {
+    text-align: center;
+    padding: 10px 0;
+    border-top: 1px solid #FFD700;
+    margin-top: 20px;
+}
+.footer-bottom .social-icons a {
+    color: #FFD700;
+    margin: 0 10px;
+    font-size: 18px;
+    text-decoration: none;
+}
+.footer-category li a:hover{
+    color: #FFD700;
+}
+@media (max-width: 600px) {
+    .footer-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .footer-about, .footer-services, .footer-contact, .footer-category {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    .footer-about h4, .footer-services h4, .footer-contact h4, .footer-category h4 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .footer-category ul li, .footer-services ul li {
+        font-size: 14px;
+    }
+
+    .footer-bottom {
+        text-align: center;
+        padding: 10px 0;
+        font-size: 12px;
+    }
+
+    .footer-bottom .social-icons a {
+        font-size: 16px;
+        margin: 0 5px;
+    }
+    .footer-category:hover{
+        background: #fdd73d;
+    }
+}
+.cart {
+    position: relative;
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -10px;
+    background-color: red;
+    color: white;
+    font-size: 12px;
+    padding: 2px 6px;
+    border-radius: 50%;
+}

@@ -1,0 +1,141 @@
+.cart-container{
+    max-width: 90%;
+    margin: 10% auto;
+    padding:5px 20px;
+    background-color: #f8f8f8;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+    border-radius: 5px;
+    margin-bottom: 100px;
+}
+table{
+    width: 100%;
+    border-collapse: collapse;
+}
+#heading{
+    text-align: center;
+    color: navy;
+    text-decoration: underline;
+    font-family: Arial,sans-serif;
+    margin-bottom: 5px;
+}
+.table-heading{
+    font-size: 20px;
+    color: navy;
+    font-weight: bold;
+    background-color: #ddd;
+}
+
+th, td{                     
+    text-align: left;
+    padding: 10px;
+    border-bottom: 2px solid #ddd;
+}
+.card img{
+    width:100px;
+    height: 70px;
+}
+.card input{
+    width:50px;
+    border-radius:10px;
+    text-align:center;
+    height:30px;
+}
+.delete-btn{
+   width: 70px;
+   cursor: pointer;
+   text-align: center;
+   
+}
+.delete-btn:hover{
+    color: red;
+}
+.pkr{
+    text-align: center;
+    font-size: 14px;
+    text-wrap: wrap;
+}
+
+.increment-btn, .decrement-btn{
+    cursor:pointer;
+    width: 30px;
+    height:20px;  
+}
+.increment-btn:hover{
+    background-color: #FFD700;
+}
+.decrement-btn:hover{
+    background-color: #FFD700;
+}
+.checkout{
+    margin-top: 20px;
+    
+}
+.checkout button{
+    margin-left: 45%;
+    background: linear-gradient(to right, #1a2a6c, #3c5fe7);
+    color: whitesmoke;
+    font-weight: bold;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 17px;
+    border-radius: 5%;
+    width: 150px;
+    height: 50px;
+}
+.checkout button:hover{
+    transform: scale(1.05);
+    background: #0335ff;
+}
+@media(max-width:480px){
+    .cart-container{
+        margin-top: 80%;
+        width: 300px;
+        overflow: hidden;
+    }
+    .cart-container h1{
+        font-size: 18px;
+    }
+    .table-heading{
+        width: 90%;
+        font-size: 11px;
+       background-color: #FFD700;
+    }
+    tr, td{
+        font-size: 11px;
+        padding: 5px;
+    }
+    .card img{
+        width:40px;
+        height: 30px;
+    }
+    .card input{
+        width:20px;
+        border-radius:5px;
+        text-align:center;
+        height:25px;
+    }
+    .quantity-control{
+        display: flex;
+        
+    }
+    .increment-btn, .decrement-btn{
+        cursor:pointer;
+        width: 20px;
+        height:20px;
+        background-color: #ddd;  
+        margin: 5px;
+    }
+   
+    .product-price{
+        font-size: 11px;
+    }
+    .pkr{
+        display: none;
+    }
+    .checkout button{
+        width: 100px;
+        height: 40px;
+        font-size: 14px;
+    }
+}

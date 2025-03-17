@@ -1,0 +1,163 @@
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+<link rel="stylesheet" href="{% static 'sales.css' %}">
+
+<body>
+    <div class="sales-container">
+        <h1>Sales Dashboard</h1>
+        <div class="breadcrumb">
+            <a href="http://127.0.0.1:8000/admin/">Admin</a> / 
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+        </div>
+        
+        <!-- Filter Form -->
+        <form method="GET" class="farm">
+            <label for="status">Order Status:</label>
+            <select name="status" id="status">
+                <option value="all">All</option>
+                <option value="pending" {% if status == "pending" %}selected{% endif %}>Pending</option>
+                <option value="cancel" {% if status == "cancel" %}selected{% endif %}>Cancel Orders</option>
+                <option value="completed" {% if status == "completed" %}selected{% endif %}>Completed</option>
+            </select>
+
+            <label for="start_date">Start Date:</label>
+            <input type="date" name="start_date" id="start_date" value="{{ request.GET.start_date }}">
+
+            <label for="end_date">End Date:</label>
+            <input type="date" name="end_date" id="end_date" value="{{ request.GET.end_date }}">
+
+            <button type="submit">Filter</button>
+        </form>
+
+        <!-- Sales Summary -->
+        <div class="rows">
+            
+                <a href="?status=all#order-details">
+                    <div class="completed"> 
+                        <i class="fas fa-box"></i><br>      
+                        Total Orders:<br> {{ total_orders }}
+                    </div>
+                </a>
+            
+          
+                <a href="?status=completed#order-details">
+                    <div class="completed">
+                        <i class="fas fa-check-circle"></i><br>
+                        Completed Orders:<br> {{ completed_orders }}      
+                    </div>
+                </a>
+        </div>
+
+        <div class="rows">
+            <a href="?status=pending#order-details">
+                <div class="pending">
+                    <i class="fas fa-hourglass-half"></i><br>
+                    Pending Orders:<br> {{ pending_orders }}       
+                </div>
+            </a>
+            <a href="?status=cancel#order-details">
+                <div class="cancelled">
+                    <i class="fas fa-times-circle"></i><br>
+                    Cancel Orders:<br> {{ cancel_orders }}
+                </div>
+            </a>
+        </div>
+
+        <div class="dv">
+            <h3>Sales Records</h3>
+            <table class="sales-table">
+                <thead>
+                    <tr>
+                        <th>Period</th>
+                        <th>Sales</th>
+                        <th>Revenue</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Sales Today</td>
+                        <td>{{ sales_today }}</td>
+                        <td>{{ revenue_today }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sales This Week</td>
+                        <td>{{ sales_this_week }}</td>
+                        <td>{{ revenue_this_week }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sales This Month</td>
+                        <td>{{ sales_this_month }}</td>
+                        <td>{{ revenue_this_month }}</td>
+                    </tr>
+                    <tr>
+                        <td>Sales This Year</td>
+                        <td>{{ sales_this_year }}</td>
+                        <td>{{ revenue_this_year }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Orders List -->
+        <div id="order-details"  class="order-container">
+            <h1>{{ status|title }} Orders</h1>
+            {% if orders %}
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Total Price</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in orders %}
+                    <tr>
+                        <td>{{ order.id }}</td>
+                        <td>{{ order.user.first_name }}</td>
+                        <td>{{ order.total_price }}</td>
+                        <td>{{ order.status }}</td>
+                        <td>{{ order.created_at }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            {% else %}
+            <div class="no-orders">
+                <h2>No {{ status|title }} Orders Found</h2>
+                <p>It looks like there are no {{ status|lower }} orders at the moment.</p>
+                <p>Check back later for updates.</p>
+            </div>
+            {% endif %}
+        </div>
+        <div>
+            <h3>Total Quantity: {{ total_quantity }}</h3> 
+        
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Product Name</th>
+                        <th>Quantity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for item in product %}
+                        <tr>
+                            <td>{{ item.product_name }}</td>
+                            <td>{{ item.product_quantity }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        <div class="dashboard-btn">
+            <a href='http://127.0.0.1:8000/admin/'>
+                <button type="submit">Back to Admin Panel</button>
+            </a>
+        </div>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'account.css' %}" />
+
+<div class="accountform">
+    <form method="post" action="{% url 'login' %}" onsubmit="return validateForm()">
+        <h3>Login</h3>
+        {% csrf_token %}
+
+        <!-- Email Input -->
+        <div class="input_container">
+            <input type="email" placeholder="Email Address" id="email" name="email" oninput="validateEmail()" maxlength="30">
+            <span id="email_error" class="error-message"></span>
+        </div>
+
+        <!-- Password Input -->
+        <div class="input_container">
+            <input type="password" id="password" name="password" placeholder="Enter your password" 
+            oninput ="validatePassword()"  maxlength="20">
+            <span class="toggle-password" onclick="togglePassword()">
+                <i id="eyeIcon" class="fas fa-eye"></i>
+            </span>
+            <span id="password_error" class="error-message"></span>
+        </div>
+
+        <button type="submit" class="c_btn">Login</button>
+
+        <div class="text">
+            Don't have an account? <a href="{% url 'savedata' %}" class="text-danger">Sign Up</a><br>
+            <a href="{% url 'password_reset' %}" class="text-danger">Forgot password?</a>
+        </div>
+    </form>
+</div>
+
+<!-- JavaScript Validation -->
+<script>
+    function validateEmail() {
+        let email = document.getElementById('email');
+        let emailError = document.getElementById('email_error');
+    
+        // Strictly allow only ".com" domains
+        let emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.com$/;
+    
+        email.addEventListener('input', function () {
+            email.value = email.value.replace(/^[^a-zA-Z]+/, ''); // Remove invalid starting characters
+    
+            if (!emailRegex.test(email.value)) {
+                emailError.innerHTML = 'Enter a valid email (e.g., example@gmail.com)';
+            } else {
+                emailError.innerHTML = '';
+            }
+        });
+    
+        if (email.value.trim() === '') {
+            emailError.innerHTML = 'Email is required';
+            return false;
+        } else if (!emailRegex.test(email.value.trim())) {
+            emailError.innerHTML = 'Enter a valid email (e.g., example@gmail.com)';
+            return false;
+        } else {
+            emailError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            return true;
+        }
+    }
+    
+
+    function validatePassword() {
+        let password = document.getElementById('password');
+        let passwordError = document.getElementById('password_error');
+      
+        // Remove spaces from the password input
+        password.addEventListener('input', function () {
+            password.value = password.value.replace(/\s/g, ''); // Removes all spaces
+        });
+      
+        if (password.value.length === 0) {
+            passwordError.innerHTML = 'Password is required';
+            return false;
+        } 
+        else {
+            passwordError.innerHTML = '<i class="fa-solid fa-circle-check"></i>';
+            return true;
+        }
+    }
+      
+      
+
+function validateForm() {
+    let isEmailValid = validateEmail();
+    let isPasswordValid = validatePassword();
+
+    return isEmailValid && isPasswordValid; // Prevent form submission if validation fails
+}
+
+function togglePassword() {
+    let passwordField = document.getElementById("password");
+    let eyeIcon = document.getElementById("eyeIcon");
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        eyeIcon.classList.remove("fa-eye");
+        eyeIcon.classList.add("fa-eye-slash");
+    } else {
+        passwordField.type = "password";
+        eyeIcon.classList.remove("fa-eye-slash");
+        eyeIcon.classList.add("fa-eye");
+    }
+}
+</script>
+
+{% endblock %}

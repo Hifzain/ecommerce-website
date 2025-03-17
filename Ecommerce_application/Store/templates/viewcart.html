@@ -1,0 +1,69 @@
+{% extends "base.html" %}
+{% block start %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'viewcart.css' %}">
+<div class="cart-container">
+    <table>
+        <h1 id="heading">Shopping Cart</h1>
+        <thead>
+            <tr class="table-heading">
+                <td>Product Image</td>
+                <td>Product Name</td>
+                <td>Quantity</td>
+                <td>Price</td>
+                <td>Delete</td>
+            </tr>
+        </thead>
+        <tbody>
+            {% if cart %}
+            {% for item in cart %}
+            <tr class="card">
+                <td><img src="{{item.product.product_image.url}}" alt="product-image"></td>
+                <td>{{item.product.product_name}}</td>
+               
+                <td>
+                    <input type="hidden" value="{{ item.product_id }}" class="prod_id">
+                    {% csrf_token %}    
+                    {% if item.product.product_quantity >= item.product_qty %}
+                    <div class="quantity-control">
+                        <button class="changequantity decrement-btn"> - </button>
+                        <input type="text" class="quantity-input" value="{{ item.product_qty }}" readonly data-max-stock="{{ item.product.product_quantity }}">
+                        <button class="changequantity increment-btn"> + </button>
+                        
+                    </div>
+                    <span class="error-message" style="color: red; display: none;"></span> 
+                    
+                    {% else %}
+                    <h4>Out of Stock</h4>
+                    {% endif %}
+                </td>
+                <td>
+                    
+                        <span class="pkr">Rs {{ item.product.discounted_price }} </span>
+                    
+                </td>
+                
+                <td>
+                    <!-- Hidden CSRF token and product ID for the delete button -->
+                    <input type="hidden" class="prod_id" value="{{ item.product.id }}">
+                    <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                    <div class="delete-btn">
+                    <i class="fa-solid fa-trash"></i>
+                </div>
+                </td>
+            </tr>
+            {% endfor %}
+            {% else %}
+            <tr>
+                <td colspan="5" style="text-align: center;">Your Cart is empty</td>
+            </tr>
+            {% endif %}
+        </tbody>
+    </table>
+    <div class="checkout">
+        <a href="{% url 'checkout' %}">
+            <button type="submit">Checkout</button></a>
+    </div>
+   
+</div>
+{% endblock %}
